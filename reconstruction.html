@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <title>Реконструкция фундаментов | ДОМОСТРОЙ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f9fafc;
+            color: #1e1e1e;
+            line-height: 1.5;
+        }
+        
+        /* ===== НАВИГАЦИЯ ===== */
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-logo a {
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-dark {
+            color: #0c2e1a;
+        }
+
+        .logo-light {
+            color: #1f9c4b;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #1f9c4b;
+        }
+
+        .nav-button {
+            background: #1f9c4b;
+            color: white !important;
+            padding: 0.8rem 1.8rem;
+            border-radius: 100px;
+        }
+
+        .nav-button:hover {
+            background: #24b155;
+            color: white !important;
+        }
+        
+        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2rem 3rem;
+        }
+        
+        /* ===== ЗАГОЛОВОК СТРАНИЦЫ ===== */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0c2e1a;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== КНОПКИ ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 1rem 2.2rem;
+            border-radius: 100px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: #1f9c4b;
+            color: white;
+            box-shadow: 0 10px 25px rgba(31,156,75,0.25);
+        }
+        
+        .btn-primary:hover {
+            background: #24b155;
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(31,156,75,0.4);
+        }
+        
+        .btn-secondary {
+            background: #e67e22;
+            color: white;
+            box-shadow: 0 10px 25px rgba(230,126,34,0.25);
+        }
+        
+        .btn-secondary:hover {
+            background: #f39c12;
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(230,126,34,0.4);
+        }
+
+        /* ===== ДО/ПОСЛЕ ГАЛЕРЕЯ ===== */
+        .before-after-section {
+            margin: 4rem 0;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .before-after-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .before-after-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: #f8fafc;
+        }
+
+        .image-container {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .before-after-content {
+            padding: 1.5rem;
+        }
+
+        .before-after-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0c2e1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .before-after-location {
+            color: #64748b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .before-after-story {
+            color: #475569;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .before-after-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail-item {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0c2e1a;
+        }
+
+        /* ===== РЕКОМЕНДАЦИИ ===== */
+        .recommendations-section {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 48px;
+            padding: 3rem;
+            margin: 4rem 0;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.05);
+        }
+
+        .recommendations-title {
+            font-size: 2rem;
+            color: #0c2e1a;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .damage-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .damage-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .damage-icon {
+            width: 60px;
+            height: 60px;
+            background: #fee2e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .damage-icon i {
+            font-size: 2rem;
+            color: #dc2626;
+        }
+
+        .damage-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0c2e1a;
+            margin-bottom: 1rem;
+        }
+
+        .damage-desc {
+            color: #475569;
+            margin-bottom: 1rem;
+        }
+
+        .damage-solution {
+            background: #f0fdf4;
+            padding: 1rem;
+            border-radius: 16px;
+            color: #1f9c4b;
+            font-weight: 500;
+        }
+
+        /* ===== ФОРМА ЗАЯВКИ ===== */
+        .form-section {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 48px;
+            padding: 3rem;
+            margin: 4rem 0;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.05);
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            color: #0c2e1a;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .form-subtitle strong {
+            color: #e67e22;
+            font-size: 1.3rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #334155;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            font-size: 1rem;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #1f9c4b;
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 16px;
+        }
+
+        .checkbox-group input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .visit-cost {
+            background: #e67e22;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.3rem;
+            margin-top: 1rem;
+        }
+
+        .form-note {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .form-note strong {
+            color: #1f9c4b;
+            font-size: 1.1rem;
+        }
+
+        /* ===== ФУТЕР ===== */
+        .footer {
+            background: white;
+            border-radius: 48px 48px 0 0;
+            padding: 3rem 2rem 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 -25px 50px -12px rgba(0,0,0,0.05);
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+        }
+        
+        .footer-logo h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo p {
+            color: #64748b;
+        }
+        
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #0c2e1a;
+        }
+        
+        .footer-links a {
+            display: block;
+            color: #64748b;
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            transition: 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: #1f9c4b;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            color: #94a3b8;
+        }
+
+        /* ===== УВЕДОМЛЕНИЯ ===== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-left: 4px solid #1f9c4b;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: 0.3s;
+            max-width: 350px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            border-left-color: #dc2626;
+        }
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .notification i {
+            font-size: 1.5rem;
+            color: #1f9c4b;
+        }
+        
+        .notification.error i {
+            color: #dc2626;
+        }
+
+        @media (max-width: 1000px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .before-after-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .before-after-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- НАВИГАЦИЯ -->
+    <div class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <div class="logo-text">
+                        <span class="logo-dark">ДОМО</span><span class="logo-light">СТРОЙ</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#services">Услуги</a>
+                <a href="index.html#gallery">Галерея</a>
+                <a href="calculator.html">Калькулятор</a>
+                <a href="reconstruction.html" class="active">Реконструкция</a>
+                <a href="index.html#contacts">Контакты</a>
+                <a href="#form" class="nav-button">Оставить заявку</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕЙНЕР -->
+    <div class="main-container">
+        <!-- ЗАГОЛОВОК -->
+        <div class="page-header">
+            <h1>Реконструкция фундаментов</h1>
+            <p>Усиление, восстановление, замена фундамента. Работаем по всему Новосибирску и области</p>
+        </div>
+
+        <!-- СЕКЦИЯ ДО/ПОСЛЕ -->
+        <div class="before-after-section">
+            <h2 class="page-header" style="margin-bottom: 2rem;">Реальные проекты до и после</h2>
+            
+            <div class="before-after-grid">
+                <!-- Объект 1 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <div class="image-container">
+                            <img src="images/REK2.jpg" alt="До реконструкции" onerror="this.src='https://images.pexels.com/photos/6284196/pexels-photo-6284196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'">
+                            <span class="image-label">ДО</span>
+                        </div>
+                        <div class="image-container">
+                            <img src="images/REK3.png" alt="После реконструкции" onerror="this.src='https://images.pexels.com/photos/6284197/pexels-photo-6284197.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'">
+                            <span class="image-label">ПОСЛЕ</span>
+                        </div>
+                    </div>
+                    <div class="before-after-content">
+                        <h3 class="before-after-title">Дом в СНТ "Березка"</h3>
+                        <div class="before-after-location">
+                            <i class="fas fa-map-marker-alt" style="color: #1f9c4b;"></i> Новосибирская область
+                        </div>
+                        <p class="before-after-story">
+                            <strong>История объекта:</strong> Дом 1985 года постройки. Владелец заметил трещины на стенах и перекос окон. 
+                            При осмотре выявили просадку угла из-за пучения грунта. Выполнили усиление фундамента винтовыми сваями.
+                        </p>
+                        <div class="before-after-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Тип постройки</div>
+                                <div class="detail-value">Жилой дом</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Материал</div>
+                                <div class="detail-value">Брус</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Размеры</div>
+                                <div class="detail-value">6х8 м</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Объект 2 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <div class="image-container">
+                            <img src="images/REK2.jpg" alt="До реконструкции" onerror="this.src='https://images.pexels.com/photos/6284198/pexels-photo-6284198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'">
+                            <span class="image-label">ДО</span>
+                        </div>
+                        <div class="image-container">
+                            <img src="images/REK3.png" alt="После реконструкции" onerror="this.src='https://images.pexels.com/photos/6284199/pexels-photo-6284199.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'">
+                            <span class="image-label">ПОСЛЕ</span>
+                        </div>
+                    </div>
+                    <div class="before-after-content">
+                        <h3 class="before-after-title">Баня в Советском районе</h3>
+                        <div class="before-after-location">
+                            <i class="fas fa-map-marker-alt" style="color: #1f9c4b;"></i> г. Новосибирск
+                        </div>
+                        <p class="before-after-story">
+                            <strong>История объекта:</strong> Баня 2010 года. Фундамент начал разрушаться из-за высокого уровня грунтовых вод.
+                            Выполнили замену фундамента на винтовые сваи с ростверком. Утеплили и сделали отмостку.
+                        </p>
+                        <div class="before-after-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Тип постройки</div>
+                                <div class="detail-value">Баня</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Материал</div>
+                                <div class="detail-value">Бревно</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Размеры</div>
+                                <div class="detail-value">5х5 м</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Объект 3 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <div class="image-container">
+                            <img src="images/REK2.jpg" alt="До реконструкции" onerror="this.src='https://images.pexels.com/photos/6284200/pexels-photo-6284200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'">
+                            <span class="image-label">ДО</span>
+                        </div>
+                        <div class="image-container">
+                            <img src="images/REK3.png" alt="После реконструкции" onerror="this.src='https://images.pexels.com/photos/6284201/pexels-photo-6284201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'">
+                            <span class="image-label">ПОСЛЕ</span>
+                        </div>
+                    </div>
+                    <div class="before-after-content">
+                        <h3 class="before-after-title">Гараж в Первомайском районе</h3>
+                        <div class="before-after-location">
+                            <i class="fas fa-map-marker-alt" style="color: #1f9c4b;"></i> г. Новосибирск
+                        </div>
+                        <p class="before-after-story">
+                            <strong>История объекта:</strong> Гараж просел из-за старого ленточного фундамента. Ворота перестали закрываться.
+                            Установили 12 свай, подняли конструкцию, выровняли. Теперь всё работает идеально.
+                        </p>
+                        <div class="before-after-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Тип постройки</div>
+                                <div class="detail-value">Гараж</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Материал</div>
+                                <div class="detail-value">Шлакоблок</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Размеры</div>
+                                <div class="detail-value">4х8 м</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <!-- Объект 4 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <div class="image-container">
+                            <img src="images/REK2.jpg" alt="До реконструкции" onerror="this.src='https://images.pexels.com/photos/6284200/pexels-photo-6284200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'">
+                            <span class="image-label">ДО</span>
+                        </div>
+                        <div class="image-container">
+                            <img src="images/REK3.png" alt="После реконструкции" onerror="this.src='https://images.pexels.com/photos/6284201/pexels-photo-6284201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'">
+                            <span class="image-label">ПОСЛЕ</span>
+                        </div>
+                    </div>
+                    <div class="before-after-content">
+                        <h3 class="before-after-title">Дачный дом в Ленинском районе</h3>
+                        <div class="before-after-location">
+                            <i class="fas fa-map-marker-alt" style="color: #1f9c4b;"></i> г. Новосибирск
+                        </div>
+                        <p class="before-after-story">
+                            <strong>История объекта:</strong> Дачный дом 1990 года. Просадка фундамента из-за промерзания грунта. Стены повело, появились щели.
+                            Выполнили подъем дома, установили 16 свай, сделали новый ростверк и утепление.
+                        </p>
+                        <div class="before-after-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Тип постройки</div>
+                                <div class="detail-value">Дачный дом</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Материал</div>
+                                <div class="detail-value">Каркас</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Размеры</div>
+                                <div class="detail-value">6х6 м</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+        <!-- СЕКЦИЯ ЭТАПОВ РЕКОНСТРУКЦИИ -->
+        <div style="margin: 4rem 0;">
+            <h2 class="recommendations-title">Как мы реконструируем фундамент</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 3rem; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                5 шагов от диагностики до сдачи объекта
+            </p>
+            
+            <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 900px; margin: 0 auto;">
+                <!-- Шаг 1 -->
+                <div style="display: flex; gap: 1.5rem; background: white; border-radius: 32px; padding: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px -10px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                    <div style="background: #1f9c4b; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span style="color: white; font-weight: 700; font-size: 1.5rem;">1</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 1.4rem; color: #0c2e1a; margin-bottom: 0.5rem; font-weight: 700;">Выезд специалиста</h3>
+                        <p style="color: #64748b; margin-bottom: 0.8rem;">Инженер приезжает на объект, проводит осмотр фундамента, оценивает масштаб проблемы.</p>
+                        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                            <span style="background: #f0fdf4; color: #1f9c4b; padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.3rem;">
+                                <i class="fas fa-clock"></i> 30–60 минут
+                            </span>
+                            <span style="background: #e67e22; color: white; padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600;">
+                                2 800 ₽
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Шаг 2 -->
+                <div style="display: flex; gap: 1.5rem; background: white; border-radius: 32px; padding: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px -10px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                    <div style="background: #1f9c4b; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span style="color: white; font-weight: 700; font-size: 1.5rem;">2</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 1.4rem; color: #0c2e1a; margin-bottom: 0.5rem; font-weight: 700;">Расчет и смета</h3>
+                        <p style="color: #64748b; margin-bottom: 0.8rem;">Составляем проект усиления, рассчитываем количество свай, глубину, диаметр. Готовим смету без накруток.</p>
+                        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                            <span style="background: #f0fdf4; color: #1f9c4b; padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.3rem;">
+                                <i class="fas fa-clock"></i> 1 день
+                            </span>
+                            <span style="background: #f0fdf4; color: #1f9c4b; padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.3rem;">
+                                <i class="fas fa-check-circle"></i> Бесплатно
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Шаг 3 -->
+                <div style="display: flex; gap: 1.5rem; background: white; border-radius: 32px; padding: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px -10px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                    <div style="background: #1f9c4b; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span style="color: white; font-weight: 700; font-size: 1.5rem;">3</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 1.4rem; color: #0c2e1a; margin-bottom: 0.5rem; font-weight: 700;">Подготовка и доставка</h3>
+                        <p style="color: #64748b; margin-bottom: 0.8rem;">Завозим материалы, сваи, инструмент. Огораживаем территорию, готовимся к подъему постройки.</p>
+                        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                            <span style="background: #f0fdf4; color: #1f9c4b; padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.3rem;">
+                                <i class="fas fa-clock"></i> 1 день
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Шаг 4 -->
+                <div style="display: flex; gap: 1.5rem; background: white; border-radius: 32px; padding: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px -10px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                    <div style="background: #1f9c4b; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span style="color: white; font-weight: 700; font-size: 1.5rem;">4</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 1.4rem; color: #0c2e1a; margin-bottom: 0.5rem; font-weight: 700;">Усиление/замена фундамента</h3>
+                        <p style="color: #64748b; margin-bottom: 0.8rem;">Поднимаем дом домкратами, устанавливаем сваи по расчетной схеме, обвязываем ростверком, фиксируем конструкцию.</p>
+                        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                            <span style="background: #f0fdf4; color: #1f9c4b; padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.3rem;">
+                                <i class="fas fa-clock"></i> 1–2 дня
+                            </span>
+                            <span style="background: #f0fdf4; color: #1f9c4b; padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.3rem;">
+                                <i class="fas fa-tools"></i> Работаем аккуратно
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Шаг 5 -->
+                <div style="display: flex; gap: 1.5rem; background: white; border-radius: 32px; padding: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px -10px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                    <div style="background: #1f9c4b; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span style="color: white; font-weight: 700; font-size: 1.5rem;">5</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 1.4rem; color: #0c2e1a; margin-bottom: 0.5rem; font-weight: 700;">Сдача и гарантия</h3>
+                        <p style="color: #64748b; margin-bottom: 0.8rem;">Проверяем качество, убираем территорию, подписываем акт. Даем гарантию до 50 лет на сваи и 5 лет на работы.</p>
+                        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                            <span style="background: #f0fdf4; color: #1f9c4b; padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.3rem;">
+                                <i class="fas fa-shield-alt"></i> Гарантия до 50 лет
+                            </span>
+                            <span style="background: #f0fdf4; color: #1f9c4b; padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.3rem;">
+                                <i class="fas fa-file-signature"></i> Договор
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- СЕКЦИЯ РЕКОМЕНДАЦИЙ -->
+        <div class="recommendations-section">
+            <h2 class="recommendations-title">Как понять, что фундаменту нужна помощь?</h2>
+            
+            <div class="damage-types">
+                <div class="damage-card">
+                    <div class="damage-icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <h3 class="damage-title">Трещины в стенах</h3>
+                    <p class="damage-desc">Вертикальные или диагональные трещины на несущих стенах, расхождение швов, откосы окон и дверей.</p>
+                    <div class="damage-solution">
+                        <i class=""></i> Рекомендация: Срочное усиление фундамента винтовыми сваями
+                    </div>
+                </div>
+
+                <div class="damage-card">
+                    <div class="damage-icon">
+                        <i class="fas fa-arrows-alt"></i>
+                    </div>
+                    <h3 class="damage-title">Перекос конструкций</h3>
+                    <p class="damage-desc">Двери и окна перестали закрываться, полы стали неровными, визуальный наклон дома.</p>
+                    <div class="damage-solution">
+                        <i class=""></i> Рекомендация: Выравнивание и усиление фундамента винтовыми сваями
+                    </div>
+                </div>
+
+                <div class="damage-card">
+                    <div class="damage-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3 class="damage-title">Разрушение цоколя</h3>
+                    <p class="damage-desc">Отслоение штукатурки, крошение бетона, видимые повреждения фундамента, плесень.</p>
+                    <div class="damage-solution">
+                        <i class=""></i> Рекомендация: Восстановление и гидроизоляция фундамента
+                    </div>
+                </div>
+
+                <div class="damage-card">
+                    <div class="damage-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3 class="damage-title">Подтопление</h3>
+                    <p class="damage-desc">Вода в подвале, сырость, грибок, затопление после дождей или таяния снега.</p>
+                    <div class="damage-solution">
+                        <i class=""></i> Рекомендация: Поднятие фундамента, дренаж, отмостка
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #1f9c4b; color: white; border-radius: 32px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Не уверены? Вызовите специалиста</h3>
+                <p style="margin-bottom: 1.5rem; font-size: 1.2rem;">Выезд специалиста для осмотра фундамента — 2800 ₽ (диагностика и консультация)</p>
+                <a href="#form" class="btn btn-secondary" style="background: white; color: #1f9c4b; font-size: 1.3rem; padding: 1rem 3rem;">
+                    <i class="fas fa-truck"></i> Заказать выезд
+                </a>
+            </div>
+        </div>
+
+        <!-- ФОРМА ЗАЯВКИ -->
+        <div class="form-section" id="form">
+            <div class="form-container">
+                <h2 class="form-title">Оставить заявку на реконструкцию</h2>
+                <div class="form-subtitle">
+                    <strong>Перезваниваем в течение 5 минут!</strong>
+                </div>
+
+                <form id="reconstructionForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Ваше имя *</label>
+                            <input type="text" class="form-control" id="name" placeholder="Иван Петров" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Номер телефона *</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="+7 (___) ___-__-__" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Тип фундамента</label>
+                            <select class="form-control" id="foundationType">
+                                <option value="">Выберите тип</option>
+                                <option value="Ленточный">Ленточный</option>
+                                <option value="Столбчатый">Столбчатый</option>
+                                <option value="Плитный">Плитный</option>
+                                <option value="Свайный">Свайный</option>
+                                <option value="Не знаю">Не знаю / Другое</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Тип постройки</label>
+                            <select class="form-control" id="buildingType">
+                                <option value="">Выберите тип</option>
+                                <option value="Жилой дом">Жилой дом</option>
+                                <option value="Баня">Баня</option>
+                                <option value="Гараж">Гараж</option>
+                                <option value="Дачный дом">Дачный дом</option>
+                                <option value="Хозпостройка">Хозпостройка</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Материал постройки</label>
+                            <select class="form-control" id="material">
+                                <option value="">Выберите материал</option>
+                                <option value="Брус">Брус</option>
+                                <option value="Бревно">Бревно</option>
+                                <option value="Кирпич">Кирпич</option>
+                                <option value="Газобетон">Газобетон</option>
+                                <option value="Каркас">Каркас</option>
+                                <option value="Шлакоблок">Шлакоблок</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Размеры постройки (м)</label>
+                            <input type="text" class="form-control" id="dimensions" placeholder="например: 6х8">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Какой дефект заметили?</label>
+                            <textarea class="form-control" id="defect" rows="3" placeholder="Опишите проблему: трещины, перекос, просадка, сырость..."></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="visit" value="yes">
+                                <label for="visit">
+                                    Готов вызвать специалиста для осмотра 
+                                    <span class="visit-cost">выезд 2800 ₽</span>
+                                </label>
+                            </div>
+                            <small style="color: #64748b; display: block; margin-top: 0.5rem;">
+                                Специалист приедет, проведет диагностику, даст рекомендации и точную смету
+                            </small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary form-submit">
+                        <i class="fas fa-paper-plane"></i> Оставить заявку
+                    </button>
+
+                    <div class="form-note">
+                        <strong></strong> Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ФУТЕР -->
+    <div class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <h3>ДОМОСТРОЙ</h3>
+                <p>Строительная компания в Новосибирске</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Услуги</h4>
+                <a href="calculator.html">Винтовые сваи</a>
+                <a href="houses.html">Строительство под ключ</a>
+                <a href="#form">Заборы</a>
+                <a href="reconstruction.html">Реконструкция</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Информация</h4>
+                <a href="index.html#about">О компании</a>
+                <a href="index.html#gallery">Наши работы</a>
+                <a href="index.html#contacts">Контакты</a>
+                <a href="#form">Оставить заявку</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Контакты</h4>
+                <a href="tel:+79130662320">+7 (913) 066-23-20</a>
+                <a href="mailto:domostroy@yandex.ru">domostroy@yandex.ru</a>
+                <a href="https://t.me/stroyd0m_bot" target="_blank">Telegram</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2026 ДОМОСТРОЙ. Все права защищены.</p>
+        </div>
+    </div>
+
+    <!-- УВЕДОМЛЕНИЕ -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <p id="notificationMessage">Спасибо! Заявка отправлена</p>
+        </div>
+    </div>
+
+    <script>
+        // Маска для телефона
+        const phoneInput = document.getElementById('phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    if (value.startsWith('7') || value.startsWith('8')) {
+                        value = value.substring(1);
+                    }
+                    
+                    let formatted = '+7 ';
+                    if (value.length > 0) {
+                        formatted += '(' + value.substring(0, 3);
+                    }
+                    if (value.length >= 4) {
+                        formatted += ') ' + value.substring(3, 6);
+                    }
+                    if (value.length >= 7) {
+                        formatted += '-' + value.substring(6, 8);
+                    }
+                    if (value.length >= 9) {
+                        formatted += '-' + value.substring(8, 10);
+                    }
+                    
+                    e.target.value = formatted;
+                }
+            });
+        }
+
+        // Уведомления
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notificationMessage');
+
+        function showNotification(message, isError = false) {
+            notificationMessage.textContent = message;
+            notification.classList.add('show');
+            if (isError) {
+                notification.classList.add('error');
+            } else {
+                notification.classList.remove('error');
+            }
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // Отправка формы
+        const form = document.getElementById('reconstructionForm');
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const foundationType = document.getElementById('foundationType').value;
+                const buildingType = document.getElementById('buildingType').value;
+                const material = document.getElementById('material').value;
+                const dimensions = document.getElementById('dimensions').value;
+                const defect = document.getElementById('defect').value;
+                const visit = document.getElementById('visit').checked;
+                
+                if (!name || !phone) {
+                    showNotification('Заполните имя и телефон', true);
+                    return;
+                }
+                
+                try {
+                    const botToken = '8576050053:AAF1rDfuJ5H9goOF553ouvGzCUHMVQ9Rt3Q';
+                    
+                    const text = `
+🚨 <b>ЗАЯВКА НА РЕКОНСТРУКЦИЮ ФУНДАМЕНТА</b>
+
+<b>👤 Имя:</b> ${name}
+<b>📞 Телефон:</b> ${phone}
+
+<b>🏗 Тип фундамента:</b> ${foundationType || 'Не указано'}
+<b>🏠 Тип постройки:</b> ${buildingType || 'Не указано'}
+<b>🧱 Материал:</b> ${material || 'Не указано'}
+<b>📏 Размеры:</b> ${dimensions || 'Не указано'}
+
+<b>🔍 Дефект:</b> ${defect || 'Не указано'}
+<b>🚗 Выезд специалиста:</b> ${visit ? 'Да (2800 ₽)' : 'Нет'}
+
+<b>⏰ Время:</b> ${new Date().toLocaleString('ru-RU')}
+                    `;
+                    
+                    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            chat_id: -1002812099564,
+                            message_thread_id: 6315,
+                            text: text,
+                            parse_mode: 'HTML'
+                        })
+                    });
+                    
+                    form.reset();
+                    showNotification('Заявка отправлена! Перезвоним в течение 5 минут');
+                    
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                    showNotification('Произошла ошибка, попробуйте позже', true);
+                }
+            });
+        }
+    </script>
+    <!-- ДОБАВЬТЕ ЭТОТ СКРИПТ В КОНЕЦ КАЖДОЙ СТРАНИЦЫ ПЕРЕД ЗАКРЫВАЮЩИМ ТЕГОМ </body> -->
+<!-- ПРОСТАЯ И ЛЁГКАЯ НАВИГАЦИЯ ДЛЯ МОБИЛЬНЫХ -->
+<script>
+// Простая навигация без тяжёлых анимаций
+(function() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSimpleNav);
+    } else {
+        initSimpleNav();
+    }
+    
+    function initSimpleNav() {
+        const navbar = document.querySelector('.navbar');
+        if (!navbar) return;
+        
+        // Только одно состояние - шапка исчезает при скролле вниз
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+        
+        // Простая функция без лишних классов
+        function updateNav() {
+            const currentScrollY = window.scrollY;
+            
+            // Если скроллим вниз и проехали больше 100px - прячем
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                navbar.style.transform = 'translateY(-100%)';
+                navbar.style.transition = 'transform 0.2s ease';
+            } 
+            // Если скроллим вверх или в самом верху - показываем
+            else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+                navbar.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollY = currentScrollY;
+            ticking = false;
+        }
+        
+        // Оптимизированный обработчик
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateNav);
+                ticking = true;
+            }
+        }, { passive: true });
+        
+        // Показываем при достижении верха
+        window.addEventListener('scroll', function() {
+            if (window.scrollY < 10) {
+                navbar.style.transform = 'translateY(0)';
+            }
+        }, { passive: true });
+    }
+})();
+</script>
+</body>
+</html>
